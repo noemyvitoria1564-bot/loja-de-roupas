@@ -1,1 +1,1 @@
-# loja-de-roupas
+# loja-de-sapatos

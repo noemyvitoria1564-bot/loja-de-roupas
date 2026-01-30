@@ -1,55 +1,57 @@
-// Aplicação de Arrays e Loops do Livro do Maujor
-const estoqueSapatos = [];
+// Aplicação de Recursos: Arrays e Manipulação de DOM
+const sapatos = [];
 
 // 1. Criando 15 Tênis (10 de 29.99 e 5 de 10.00)
 for(let i=1; i<=15; i++) {
-    estoqueSapatos.push({
-        nome: `Tênis Sport ${i}`,
+    sapatos.push({
+        nome: `Tênis Modelo ${i}`,
         preco: i <= 10 ? 29.99 : 10.00,
-        img: `https://picsum.photos/200/200?random=${i+50}` 
+        img: `https://picsum.photos/200/200?random=${i}` 
     });
 }
 
 // 2. Criando 10 Botas (8 de 100.00 e 2 de 49.50)
 for(let i=1; i<=10; i++) {
-    estoqueSapatos.push({
+    sapatos.push({
         nome: `Bota Adventure ${i}`,
         preco: i <= 8 ? 100.00 : 49.50,
-        img: `https://picsum.photos/200/200?random=${i+70}`
+        img: `https://picsum.photos/200/200?random=${i+15}`
     });
 }
 
 // 3. Criando 10 Sandálias (Todas 99.99)
 for(let i=1; i<=10; i++) {
-    estoqueSapatos.push({
+    sapatos.push({
         nome: `Sandália Summer ${i}`,
         preco: 99.99,
-        img: `https://picsum.photos/200/200?random=${i+90}`
+        img: `https://picsum.photos/200/200?random=${i+25}`
     });
 }
 
-let totalFinal = 0;
+let total = 0;
 const vitrine = document.getElementById('vitrine-sapatos');
-const lista = document.getElementById('lista-compras');
-const labelTotal = document.getElementById('soma-total');
+const listaUi = document.getElementById('lista-carrinho');
+const totalUi = document.getElementById('valor-total');
 
-// Renderização Dinâmica (Funcionamento do Código)
-estoqueSapatos.forEach(sapato => {
+// Renderizar sapatos (Funcionamento do Código)
+sapatos.forEach(item => {
     vitrine.innerHTML += `
-        <div class="sapato-card">
-            <img src="${sapato.img}" alt="Sapato">
-            <h4>${sapato.nome}</h4>
-            <p class="valor">R$ ${sapato.preco.toFixed(2)}</p>
-            <button onclick="adicionarAoCarrinho('${sapato.nome}', ${sapato.preco})">Reservar</button>
+        <div class="card">
+            <img src="${item.img}" alt="Sapato">
+            <h4>${item.nome}</h4>
+            <p class="preco">R$ ${item.preco.toFixed(2)}</p>
+            <button onclick="adicionar('${item.nome}', ${item.preco})">Comprar</button>
         </div>
     `;
 });
 
-function adicionarAoCarrinho(nome, preco) {
+// Função do Carrinho (Interatividade)
+function adicionar(nome, preco) {
     const li = document.createElement('li');
-    li.innerText = `👞 ${nome} - R$ ${preco.toFixed(2)}`;
-    lista.appendChild(li);
+    li.innerText = `👟 ${nome} - R$ ${preco.toFixed(2)}`;
+    listaUi.appendChild(li);
     
-    totalFinal += preco;
-    labelTotal.innerText = totalFinal.toFixed(2);
+    total += preco;
+    totalUi.innerText = total.toFixed(2);
+    alert(nome + " adicionado!");
 }
